@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  excerpt      String?
+  content      String   @db.Text
+  category     String
+  tags         String[]
+  author       String
+  featuredImg  String?
+  seoTitle     String?
+  seoDesc      String?
+  status       String   @default("DRAFT") // DRAFT, PUBLISHED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Template {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  category     String
+  fileUrl      String
+  previewUrl   String?
+  version      String   @default("1.0")
+  instructions String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id               String   @id @default(cuid())
+  title            String
+  problem          String   @db.Text
+  businessContext  String   @db.Text
+  objectives       String   @db.Text
+  datasetUrl       String?
+  skills           String[]
+  solutionApproach String   @db.Text
+  expectedOutput   String   @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model LearningPath {
+  id            String   @id @default(cuid())
+  title         String
+  description   String   @db.Text
+  difficulty    String   // Beginner, Intermediate, Advanced
+  duration      String
+  prerequisites String[]
+  skillsGained  String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

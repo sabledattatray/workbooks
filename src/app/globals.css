@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
 
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Primary background: warm/neutral white */
+    --background: #fafaf9; 
+    /* Primary text: deep charcoal */
+    --foreground: #1c1917; 
+
+    /* Professional green/teal direction associated with productivity/data */
+    --primary: #0f766e;
+    --primary-foreground: #ffffff;
+    
+    /* Secondary text: muted slate / restrained blue */
+    --secondary: #f1f5f9;
+    --secondary-foreground: #334155;
+
+    /* Accent */
+    --accent: #f8fafc;
+    --accent-foreground: #0f172a;
+
+    --muted: #f3f4f6;
+    --muted-foreground: #64748b;
+
+    /* Borders: very light gray */
+    --border: #e2e8f0;
+
+    /* State colors */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
 }
